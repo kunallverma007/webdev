@@ -3,7 +3,6 @@ const nodemailer=require('nodemailer')
 const  User = require('../User.js');
 const bcrypt =  require('bcrypt');
 const jwt = require('jsonwebtoken');
-const cors = require("cors");
 const transporter=nodemailer.createTransport({
     service:'gmail',
     auth:{
@@ -11,8 +10,8 @@ const transporter=nodemailer.createTransport({
         pass:'bhandari',
     }
 });
-router.options("/register", cors());
-router.post('/register',cors(), async (req, res) => {
+router.options("/register");
+router.post('/register', async (req, res) => {
     const emailExist = await User.findOne({
         email: req.body.email
     });
@@ -20,7 +19,7 @@ router.post('/register',cors(), async (req, res) => {
     const salt = await bcrypt.genSalt(10);
     const hashPassword = await bcrypt.hash(req.body.password, salt);
     const user = new User({
-        name: req.body.name,
+        name: req.body.username,
         email: req.body.email,
         password: hashPassword,
     });
@@ -41,11 +40,7 @@ router.post('/register',cors(), async (req, res) => {
                 console.log("Email sent"+info.response);
             }
         });
-            res.header("Access-Control-Allow-Origin": "*");
-	    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
-	    res.header("Access-Control-Allow-Headers":"X-PINGOTHER, Content-Type");
-	    res.header("Access-Control-Max-Age": 86400);
-	    res.send(user);
+           res.send(user);
 	
     } catch (err) {
         console.log(err);
