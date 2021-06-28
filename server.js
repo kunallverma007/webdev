@@ -15,7 +15,7 @@ mongoose.connect(process.env.DB_CONNECT,{
 //middlewaew
 app.use(express.json());
 app.use(cors({
-    origin:"https://ezy-mail-test.herokuapp.com/",
+    origin:"*",
 }))
 app.use('/',authRoute);
 
