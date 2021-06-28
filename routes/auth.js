@@ -39,7 +39,12 @@ router.post('/register', async (req, res) => {
                 console.log("Email sent"+info.response);
             }
         });
-        res.send(user);
+            res.header("Access-Control-Allow-Origin": "*");
+	    res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+	    res.header("Access-Control-Allow-Headers":"X-PINGOTHER, Content-Type");
+	    res.header("Access-Control-Max-Age": 86400);
+	    res.send(user);
+	
     } catch (err) {
         console.log(err);
         res.status(400).send(err);
