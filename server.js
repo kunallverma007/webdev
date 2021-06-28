@@ -15,7 +15,7 @@ app.use(express.json());
 
 app.use(cors({
      'allowedHeaders': ['Content-Type'],
-  'origin': '*',
+  'origin': true,
   'preflightContinue': true  
 }))
 
