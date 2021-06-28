@@ -14,8 +14,10 @@ mongoose.connect(process.env.DB_CONNECT,{
  },()=>console.log('connected to db'));
 //middlewaew
 app.use(express.json());
+app.options('*', cors());
 app.use(cors({
     origin:"*",
+    
 }))
 app.use('/',authRoute);
 
