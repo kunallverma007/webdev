@@ -16,7 +16,9 @@ app.use(express.json());
 app.use(cors({
      'allowedHeaders': ['Content-Type'],
   'origin': true,
-  'preflightContinue': true  
+  'preflightContinue': true,
+    "allowedMethods":["GET","POST","OPTIONS"],
+    "allowedOrigin":"https://ezy-mail-test.herokuapp.com",
 }))
 
 app.use('/',authRoute);
