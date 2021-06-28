@@ -3,6 +3,7 @@ const nodemailer=require('nodemailer')
 const  User = require('../User.js');
 const bcrypt =  require('bcrypt');
 const jwt = require('jsonwebtoken');
+const cors = require("cors");
 const transporter=nodemailer.createTransport({
     service:'gmail',
     auth:{
@@ -10,7 +11,8 @@ const transporter=nodemailer.createTransport({
         pass:'bhandari',
     }
 });
-router.post('/register', async (req, res) => {
+router.options("/register", cors());
+router.post('/register',cors(), async (req, res) => {
     const emailExist = await User.findOne({
         email: req.body.email
     });
