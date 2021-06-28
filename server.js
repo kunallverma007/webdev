@@ -12,9 +12,13 @@ mongoose.connect(process.env.DB_CONNECT,{
  },()=>console.log('connected to db'));
 //middlewaew
 app.use(express.json());
+
 app.use(cors({
-    origin:"*",    
+     'allowedHeaders': ['Content-Type'],
+  'origin': '*',
+  'preflightContinue': true  
 }))
+
 app.use('/',authRoute);
 app.listen(process.env.PORT || 3001,function(){
     
