@@ -25,7 +25,7 @@ router.post('/register', async (req, res) => {
     });
     try {
         const savedUser = await user.save();
-        var link="https://localhost:3001/verify/"+savedUser._id;
+        var link="https://ezymailserver.herokuapp.com/verify/"+savedUser._id;
         var mailoptions={
             from:"ezymail.mailer@gmail.com",
             to:user.email,
